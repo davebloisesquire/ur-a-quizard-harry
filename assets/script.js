@@ -6,21 +6,41 @@ const questions = [
     answer3: "null",
     answer4: "42",
     correct: "4"
+  },
+  {
+    question: "What is love?",
+    answer1: "null",
+    answer2: "evol",
+    answer3: "baby, don't hurt me, no more",
+    answer4: "42",
+    correct: "3"
+  },
+  {
+    question: "Which of these is the biggest number?",
+    answer1: "8",
+    answer2: "Q",
+    answer3: "5",
+    answer4: "3",
+    correct: "1"
   }
 ]
 
-function questionGenerator(question) {
-  $('.question-area .answer').data("correct", false);
+function startGame() {
 
-  let correctAnswerData = ".question-area .answer." + questions.correct;
-  $('.question-area .question').text(question.question);
-  $('.question-area .answer.1').text(question.answer1);
-  $('.question-area .answer.2').text(question.answer2);
-  $('.question-area .answer.3').text(question.answer3);
-  $('.question-area .answer.4').text(question.answer4);
-  $(correctAnswerData).data("correct", true)
 }
 
+function startTimer() {
 
+}
 
-//questionGenerator(questions[0]);
+function stopTimer() {
+
+}
+
+function sumbitScore() {
+
+}
+
+function questionGenerator(question) {
+
+}
