@@ -1,3 +1,6 @@
+const starter = document.getElementById("start-btn")
+const timeDisplay = document.getElementById("timer-display")
+var secondsLeft = 10;
 const questions = [
   {
     question: "What is the answer to life the universe and everything?",
@@ -26,15 +29,24 @@ const questions = [
 ]
 
 function startGame() {
-
+console.log("It has begun!");
+startTimer()
 }
 
 function startTimer() {
+  var startTime = setInterval(function() {
+    secondsLeft--;
+    if (secondsLeft === 0 || ) {
+      clearInterval(startTime);
+      // TODO: Add ending stuff here
+    }
+    timeDisplay.textContent = String(secondsLeft);
+  }, 1000)
 
 }
 
 function stopTimer() {
-
+  clearInterval(startTime);
 }
 
 function sumbitScore() {
@@ -44,3 +56,7 @@ function sumbitScore() {
 function questionGenerator(question) {
 
 }
+
+starter.addEventListener('click', function(e) {
+  startGame();
+})
