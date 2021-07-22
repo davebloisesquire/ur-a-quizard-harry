@@ -3,7 +3,8 @@ const timeDisplay = document.getElementById("timer-display");
 var secondsLeft = 10;
 var questionNumber;
 
-const questions = [{
+const questions = [
+  {
     question: "What is the answer to life the universe and everything?",
     answer1: "love",
     answer2: "happieness",
@@ -41,8 +42,7 @@ function startGame() {
   console.log("It has begun!");
   secondsLeft = 45;
   startTimer();
-  questionNumber = 0;
-  questionGenerator(questions[questionNumber]);
+  questionDealer(questions);
 };
 
 
@@ -68,8 +68,28 @@ function sumbitScore() {
 
 };
 
+function timeDemerit() {
+  if (secondsLeft > 10) {
+    secondsLeft -= 10;
+  } else {
+    secondsLeft = 1;
+  }
+};
+
+function questionDealer(questionsList) {
+  for (var i = 0; i < questionsList.length; i++) {
+      var answerCheck = questionGenerator(questionsList[i]);
+      if (answerCheck) {
+        console.log("Correct!");
+      } else {
+        console.log("Wrong!");
+      }
+  }
+}
+
 // Generating the questions and handling question logic
 function questionGenerator(question) {
+  console.log(question);
   //grabbing the question and answer data from the questions object
   var answerCorrect = ".ans" + question.correct;
   answerCorrect = document.querySelector(answerCorrect);
@@ -97,38 +117,21 @@ function questionGenerator(question) {
 
   questionArea.addEventListener('click', function(e) {
     var element = e.target;
-
+    console.log("Click!");
     if (element.matches(".answer")) {
       var isCorrect = element.getAttribute('data-correct');
-      console.log(isCorrect);
       if (isCorrect === "true") {
         //When they answer correct
-        questionNumber++;
-        if (questionNumber < questions.length) {
-          questionGenerator(questions[questionNumber]);
-        } else {
-          console.log(this);
-          return;
-        }
+        return true;
       } else {
-        //When they answer wrong
+        //when they answer false
         timeDemerit();
+        return false;
+
       }
     }
   })
 
-};
-
-function functionName() {
-
-}
-
-function timeDemerit() {
-  if (secondsLeft > 10) {
-    secondsLeft -= 10;
-  } else {
-    secondsLeft = 1;
-  }
 };
 
 starter.addEventListener('click', function(e) {
