@@ -3,6 +3,7 @@ const timeDisplay = document.getElementById("timer-display");
 const currentScoreDisplay = document.getElementById("score-display");
 const submitScoreButton = document.getElementById("submit-score");
 const highScorerName = document.getElementById("high-scorer");
+const highScoreDisplayBoard = document.getElementById('high-scores');
 
 var highScores = {};
 var secondsLeft = 10;
@@ -159,10 +160,23 @@ function endGame() {
   console.log("Game Done!");
 };
 
-var savedHighScores = JSON.parse(localStorage.getItem("savedHighScores"))
-if (savedHighScores !== null) {
-  highScores = savedHighScores;
+function refreshHighScores() {
+  highScoreDisplayBoard.innerHTML = '';
+  var savedHighScores = JSON.parse(localStorage.getItem("savedHighScores"))
+  if (savedHighScores !== null) {
+    highScores = savedHighScores;
+  }
+
+  for (var i = 0; i < Object.keys(highScores).length; i++) {
+    var scoreDisplayName = Object.keys(highScores)[i];
+    var scoreDisplayScore = highScores[scoreDisplayName];
+    var newScore = scoreDisplayName + " : " + scoreDisplayScore;
+    var li = document.createElement("li");
+    li.textContent = newScore;
+    highScoreDisplayBoard.appendChild(li);
+  }
 }
+refreshHighScores();
 
 starter.addEventListener('click', function(e) {
   startGame();
@@ -173,4 +187,5 @@ submitScoreButton.addEventListener('click', function(e) {
   highScores[highScorerName.value] = currentScore;
   console.log(highScorerName.value);
   localStorage.setItem("savedHighScores", JSON.stringify(highScores));
+  refreshHighScores();
 });
