@@ -13,37 +13,54 @@ var questionNumber;
 var currentScore;
 
 //This object holds the questions and answers
-const questions = [{
-    question: "What is the answer to life the universe and everything?",
-    answer1: "love",
-    answer2: "happieness",
-    answer3: "null",
-    answer4: "42",
+const questions = [
+  {
+    question: "What is the meaning of life the universe and everything?",
+    answer1: "42",
+    answer2: "6",
+    answer3: "15",
+    answer4: "34",
+    correct: "1"
+  },
+  {
+    question: "Inside which HTML element do we put the JavaScript?",
+    answer1: "<JavaScript>",
+    answer2: "<code>",
+    answer3: "<js>",
+    answer4: "<script>",
     correct: "4"
   },
   {
-    question: "What is love?",
-    answer1: "null",
-    answer2: "evol",
-    answer3: "baby, don't hurt me, no more",
-    answer4: "42",
+    question: "Where would you insert JavaScript into HTML?",
+    answer1: "<head>",
+    answer2: "<body>",
+    answer3: "<head> or <body> will both work",
+    answer4: "trick question, javascript isn't real",
     correct: "3"
   },
   {
-    question: "What is the answer to life the universe and everything?",
-    answer1: "love",
-    answer2: "happieness",
-    answer3: "null",
-    answer4: "42",
-    correct: "4"
+    question: "What is the correct formatting for referring to an external script called \"script.js\"?",
+    answer1: "<script href=\"script.js\">",
+    answer2: "<script link=\"script.js\">",
+    answer3: "<script src=\"script.js\">",
+    answer4: "<link src=\"script.js\">",
+    correct: "3"
   },
   {
-    question: "Which of these is the biggest number?",
-    answer1: "8",
-    answer2: "Q",
-    answer3: "5",
-    answer4: "3",
+    question: "Which of the following would allow a user to enter text?",
+    answer1: "prompt()",
+    answer2: "alert()",
+    answer3: "console.log()",
+    answer4: "talk()",
     correct: "1"
+  },
+  {
+    question: "Which of the following would create a function in JS?",
+    answer1: "create()",
+    answer2: "def()",
+    answer3: "functionious creatous!",
+    answer4: "function funcName() {}",
+    correct: "4"
   }
 ];
 
