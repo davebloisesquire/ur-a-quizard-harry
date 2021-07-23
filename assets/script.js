@@ -1,7 +1,13 @@
 const starter = document.getElementById("start-btn");
 const timeDisplay = document.getElementById("timer-display");
+const currentScoreDisplay = document.getElementById("score-display");
+const submitScoreButton = document.getElementById("submit-score");
+const highScorerName = document.getElementById("high-scorer");
+
+var highScores = {};
 var secondsLeft = 10;
 var questionNumber;
+var currentScore;
 
 const questions = [
   {
@@ -41,19 +47,17 @@ const questions = [
 function startGame() {
   console.log("It has begun!");
   secondsLeft = 45;
+  currentScore = 0;
   startTimer();
   questionDealer(questions);
 };
 
-
 var startTime;
-
 function startTimer() {
   startTime = setInterval(function() {
     secondsLeft--;
     if (secondsLeft === 0) {
-      clearInterval(startTime);
-      // TODO: Add ending stuff here
+      endGame();
     }
     timeDisplay.textContent = String(secondsLeft);
   }, 1000)
@@ -64,7 +68,7 @@ function stopTimer() {
   clearInterval(startTime);
 };
 
-function sumbitScore() {
+function submitScore() {
 
 };
 
@@ -76,15 +80,49 @@ function timeDemerit() {
   }
 };
 
+function addToScore(points) {
+  currentScore += points;
+  currentScoreDisplay.textContent = currentScore;
+};
+
 function questionDealer(questionsList) {
-  for (var i = 0; i < questionsList.length; i++) {
-      var answerCheck = questionGenerator(questionsList[i]);
-      if (answerCheck) {
-        console.log("Correct!");
-      } else {
-        console.log("Wrong!");
+  var questionNumber = 0;
+
+  questionGenerator(questionsList[questionNumber]);
+  var questionArea = document.getElementById('question-area');
+  questionArea.addEventListener('click', function(e) {
+    var element = e.target;
+
+    if (element.matches(".answer")) {
+
+      if (questionsList.length - 1 > questionNumber) {
+        var isCorrect = element.getAttribute('data-correct');
+        if (isCorrect === "true") {
+          //When they answer correct
+          addToScore(10);
+          questionNumber++;
+          questionGenerator(questionsList[questionNumber]);
+        } else {
+          //when they answer false
+          timeDemerit();
+        }
+      } else if (questionsList.length - 1 == questionNumber) {
+        var isCorrect = element.getAttribute('data-correct');
+        if (isCorrect === "true") {
+          //When they answer correct
+          addToScore(10);
+          endGame();
+        } else {
+          //when they answer false
+          timeDemerit();
+        }
       }
-  }
+
+    }
+  })
+
+
+
 }
 
 // Generating the questions and handling question logic
@@ -98,7 +136,6 @@ function questionGenerator(question) {
   var answerTwo = document.querySelector(".ans2");
   var answerThree = document.querySelector(".ans3");
   var answerFour = document.querySelector(".ans4");
-  var questionArea = document.getElementById('question-area');
 
   //Display Questions and possible answers in the question area
   questionDisplay.textContent = question.question;
@@ -114,26 +151,26 @@ function questionGenerator(question) {
   answerFour.setAttribute("data-correct", false);
   //Making only the correct answer true
   answerCorrect.setAttribute("data-correct", true);
-
-  questionArea.addEventListener('click', function(e) {
-    var element = e.target;
-    console.log("Click!");
-    if (element.matches(".answer")) {
-      var isCorrect = element.getAttribute('data-correct');
-      if (isCorrect === "true") {
-        //When they answer correct
-        return true;
-      } else {
-        //when they answer false
-        timeDemerit();
-        return false;
-
-      }
-    }
-  })
-
 };
+
+function endGame() {
+  stopTimer();
+  submitScore();
+  console.log("Game Done!");
+};
+
+var savedHighScores = JSON.parse(localStorage.getItem("savedHighScores"))
+if (savedHighScores !== null) {
+  highScores = savedHighScores;
+}
 
 starter.addEventListener('click', function(e) {
   startGame();
+});
+
+
+submitScoreButton.addEventListener('click', function(e) {
+  highScores[highScorerName.value] = currentScore;
+  console.log(highScorerName.value);
+  localStorage.setItem("savedHighScores", JSON.stringify(highScores));
 });
