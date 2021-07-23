@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="./assets/style.css">
   <title>JS Quiz! | Boy Howdy, it's as fun as it sounds!!!</title>
 </head>
-<body>
 <header>
   <h1>Javascript Quiz!</h1>
   <h2>Do you dare answer these questions!?!</h2>
+</header>
+<body>
+<section id="status-bar">
   <h3>Time Remaining: <span id="timer-display">0</span></h3>
   <h3>Score: <span id="score-display"></span></h3>
-</header>
+</section>
 <section id="quiz-area">
-  <article class="start-area">
+  <article id="start-area">
     <button type="button" id="start-btn">Start</button>
     <h3>High Scores</h3>
     <ul id="high-scores"></ul>
@@ -27,6 +29,7 @@
     <button class="answer ans3">Option 3</button>
     <button class="answer ans4">Option 4</button>
   </article>
+  <h3 id="wereYouCorrect"></h3>
 </section>
 <section id="highScoreInput" class="hide">
   <article class="enter-score">
