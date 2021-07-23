@@ -51,6 +51,7 @@ function startGame() {
   currentScore = 0;
   startTimer();
   questionDealer(questions);
+  document.getElementById('question-area').classList.remove('hide');
 };
 
 var startTime;
@@ -70,7 +71,7 @@ function stopTimer() {
 };
 
 function submitScore() {
-
+  document.getElementById('highScoreInput').classList.remove('hide');
 };
 
 function timeDemerit() {
@@ -156,6 +157,7 @@ function questionGenerator(question) {
 
 function endGame() {
   stopTimer();
+  document.getElementById('question-area').classList.add('hide');
   submitScore();
   console.log("Game Done!");
 };
@@ -187,5 +189,6 @@ submitScoreButton.addEventListener('click', function(e) {
   highScores[highScorerName.value] = currentScore;
   console.log(highScorerName.value);
   localStorage.setItem("savedHighScores", JSON.stringify(highScores));
+  document.getElementById('highScoreInput').classList.add('hide');
   refreshHighScores();
 });
